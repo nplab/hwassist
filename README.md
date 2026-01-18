@@ -20,9 +20,9 @@ The dtrace action prints the value in hexadecimal followed by the name of the
 
 ## Background
 
-FreeBSD allows an user to enable or disable transmission checksum offloading
+FreeBSD allows a user to enable or disable transmission checksum offloading
 (`TXCSUM`) or (`TXCSUM6`) and transmission segmentation offloading
-(`TSO` or `TSO6`) on an network interface. For example, enabling `TXCSUM` with
+(`TSO` or `TSO6`) on a network interface. For example, enabling `TXCSUM` with
 `ifconfig` on interface em0:
 
 ```
@@ -30,11 +30,11 @@ ifconfig em0 txcsum
 ```
 
 For which protocols the interface performs checksum offloading is not
-transparent. The driver sets the protocol specific `CSUM_*` flags in the
-`if_hwassist` field of interface's `struct ifnet`. This script allows to
-read and print this field.
+transparent. The driver sets the protocol-specific `CSUM_*` flags in the
+`if_hwassist` field of interface's `struct ifnet`. This script allows 
+reading and printing this field.
 
-This is an example output of the script for the igb3 interface.
+The following is an example output of the script for the igb3 interface.
 
 ```
 sudo ./hwassist.sh igb3
@@ -49,7 +49,7 @@ igb3: flags=1008943<UP,BROADCAST,RUNNING,PROMISC,SIMPLEX,MULTICAST,LOWER_UP> met
 
 The `ifconfig` output shows with the options that `TXCSUM` and `TXCSUM_IPV6` is
 enabled. The `dtrace` output (last line) shows with hwassist that the interface
-supports checksum offloading for, among others IPv4 UDP (`CSUM_IP_UDP`), 
+supports checksum offloading for, among others, IPv4 UDP (`CSUM_IP_UDP`), 
 IPv4 TCP (`CSUM_IP_TCP`), and IPv4 SCTP (`CSUM_IP_SCTP`). Since it does not list
 `CSUM_IP`, it also shows that the interface does not support checksum offloading
 for the IP header checksum.
